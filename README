@@ -1,0 +1,72 @@
+TASK 1: XOR între două șiruri de octeți.
+		Implementarea unei funcții care primește mesajul criptat și cheia
+		folosită la criptare, ambele în reprezentare binară, și decodează
+		mesajul in-place (mesajul decriptat va suprascrie mesajul criptat).
+
+TASK 2: Rolling XOR.
+		Implementarea functiei rolling_xor care primește un mesaj criptat
+		și face decodarea in-place (mesajul decriptat va suprascrie mesajul
+		criptat) a acestuia.
+
+TASK 3: XOR între două șiruri reprezentate prin caractere hexazecimale.
+		Implementarea unei operații similare task-ului 1. Atât mesajul
+		criptat cât și cheia care a fost folosită la criptare vor fi
+		reprezentate prin caractere hexazecimale, fiind necesară conversia
+		datelor în formă binară.
+
+TASK 4: Decodificarea unui șir în reprezentare base32.
+		Implementarea funcției base32decode care realizează decodificarea
+		unui șir codificat base32.
+
+TASK 5: Bruteforce pe XOR cu cheie de un octet.
+		Implementarea funcției bruteforce_singlebyte_xor care va primi un
+		mesajul criptat și va returna cheia folosită în criptarea mesajului,
+		precum și mesajul decriptat in-place.
+
+TASK 6: Vigenere Cipher.
+		Implementarea funcției decode_vigenere care realizează decodificarea
+		unui șir.
+
+
+TASK 1
+->	Pun pe stiva adresele adresele de inceput ale celor doua siruri si
+apelez functia.
+->	Parcurg in paralel sirurile si efectuez xor byte cu byte.
+->	Stiind ca sirurile au aceeasi lungime, repet efectuarea xor-ului si
+incrementarea pozitiilor pana cand ajung la primul byte zero.
+->	Suprascrierea elementelor sirului initial se realizeaza imediat dupa
+efectuarea operatiei xor.
+
+TASK 2
+->	Pun pe stiva adresa sirului si apelez functia.
+->	Realizez xor intre byte-ul de pe pozitia n si byte-ul de pe pozitia
+n-1 si suprascriu byte-ul n cu rezultatul obtinut.
+->	Primul byte ramane neschimbat.
+
+TASK 3
+->	Convertesc pe rand cele doua siruri din binar in hexazecimal, grupand
+cate doua caractere si avand in vedere diferenta de cod ASCII intre cifre si
+litere.
+->	Modific sirurile in-place si realizez xor octet cu octet utilizand
+functia implementata la task-ul 1.
+
+TASK 4
+->	Pun pe stiva adresa sirului si apelez functia base32decode.
+->	Calculez adresa sirului, apoi apelez functia base32_to_bin pentru a
+realiza conversia base32->binar.
+->	Din fiecare byte rezultat, semnificativi pentru acest tip de codificare
+sunt ultimii 5 biti. Utilizand acesti 5 biti din fiecare octet, realizez grupuri
+de cate 8 biti. Astfel, la 40 de biti "utili" se obtin 8 octeti, fiecare octet
+reprezentand o valoare ASCII.
+
+TASK 5
+->	Stiind ca cheia este reprezentata pe un octet, aceasta poate avea valoarea
+cuprinsa intre 1 si 255.
+->	Testez fiecare valoare pana cand, la efectuarea operatiei xor intre stringul
+dat si cheia repetata (cu lungime egala cu lungimea sirului), obtin in sirul nou
+substringul 'force'.
+
+TASK 6
+->	Parcurg simultan cele doua siruri, modificand doar caracterele care sunt
+cuprinse in intervalul 'a'-'z'.
+->	Repet cheia atunci cand am ajuns ajuns cand am ajuns la NULL.
